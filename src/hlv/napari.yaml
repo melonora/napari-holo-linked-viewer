@@ -1,0 +1,50 @@
+name: holo-linked-viewer
+display_name: Holo Linked Viewer
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/technical_references/manifest.html#fields for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: holo-linked-viewer.get_reader
+      python_name: hlv._reader:napari_get_reader
+      title: Open data with Holo Linked Viewer
+    - id: holo-linked-viewer.write_multiple
+      python_name: hlv._writer:write_multiple
+      title: Save multi-layer data with Holo Linked Viewer
+    - id: holo-linked-viewer.write_single_image
+      python_name: hlv._writer:write_single_image
+      title: Save image data with Holo Linked Viewer
+    - id: holo-linked-viewer.make_container_widget
+      python_name: hlv:ImageThreshold
+      title: Make threshold Container widget
+    - id: holo-linked-viewer.make_magic_widget
+      python_name: hlv:threshold_magic_widget
+      title: Make threshold magic widget
+    - id: holo-linked-viewer.make_function_widget
+      python_name: hlv:threshold_autogenerate_widget
+      title: Make threshold function widget
+    - id: holo-linked-viewer.make_qwidget
+      python_name: hlv:ExampleQWidget
+      title: Make example QWidget
+  readers:
+    - command: holo-linked-viewer.get_reader
+      accepts_directories: false
+      filename_patterns: ['*.npy']
+  writers:
+    - command: holo-linked-viewer.write_multiple
+      layer_types: ['image*','labels*']
+      filename_extensions: []
+    - command: holo-linked-viewer.write_single_image
+      layer_types: ['image']
+      filename_extensions: ['.npy']
+  widgets:
+    - command: holo-linked-viewer.make_container_widget
+      display_name: Container Threshold
+    - command: holo-linked-viewer.make_magic_widget
+      display_name: Magic Threshold
+    - command: holo-linked-viewer.make_function_widget
+      autogenerate: true
+      display_name: Autogenerate Threshold
+    - command: holo-linked-viewer.make_qwidget
+      display_name: Example QWidget
