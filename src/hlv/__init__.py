@@ -1,23 +1,19 @@
+from importlib.metadata import version  # Python = 3.9
+
+__version__ = version("holo-linked-viewer")
+
+from packaging.version import parse
+
 try:
-    from ._version import version as __version__
+    __full_version__ = parse(version(__name__))
+    __full_version__ = (
+        f"{__version__}+{__full_version__.local}"
+        if __full_version__.local
+        else __version__
+    )
 except ImportError:
-    __version__ = "unknown"
+    __full_version__ = __version__
 
-from ._reader import napari_get_reader
-from ._widget import (
-    ExampleQWidget,
-    ImageThreshold,
-    threshold_autogenerate_widget,
-    threshold_magic_widget,
-)
-from ._writer import write_multiple, write_single_image
+del version, parse
 
-__all__ = (
-    "napari_get_reader",
-    "write_single_image",
-    "write_multiple",
-    "ExampleQWidget",
-    "ImageThreshold",
-    "threshold_autogenerate_widget",
-    "threshold_magic_widget",
-)
+from hlv.widgets.dataloader import DataLoaderWidget  # noqa: E402

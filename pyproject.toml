@@ -28,7 +28,6 @@ dependencies = [
     "numpy",
     "magicgui",
     "qtpy",
-    "scikit-image",
 ]
 
 [project.optional-dependencies]
@@ -38,7 +37,7 @@ testing = [
     "pytest-cov",  # https://pytest-cov.readthedocs.io/en/latest/
     "pytest-qt",  # https://pytest-qt.readthedocs.io/en/latest/
     "napari",
-    "pyqt5",
+    "pyqt6",
 ]
 
 [project.entry-points."napari.manifest"]
@@ -64,6 +63,8 @@ where = ["src"]
 write_to = "src/hlv/_version.py"
 fallback_version = "0.0.1+nogit"
 
+[project.scripts]
+napari-holo-link-viewer = "hlv.__main__:main"
 
 [tool.black]
 line-length = 79
