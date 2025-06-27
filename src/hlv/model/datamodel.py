@@ -78,7 +78,7 @@ class DataModel:
 
     @axis_columns.setter
     def axis_columns(self, columns: Iterable[str]) -> None:
-        self._axis_columns.update(columns)
+        self._axis_columns = columns
 
     @property
     def col_string_filter(self) -> str:

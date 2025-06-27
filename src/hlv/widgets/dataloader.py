@@ -104,8 +104,10 @@ class DataLoaderWidget(QWidget):
         self.set_axis_columns()
 
     def set_axis_columns(self):
+        column_set = set()
         for df in self.model.path_csv_mapper.values():
-            self.model.axis_columns = df.columns
+            column_set.update(df.columns)
+        self.model.axis_columns = column_set
 
     def _update_filter(self):
         """Update marker filter upon text change of the filter field widget."""
@@ -113,11 +115,11 @@ class DataLoaderWidget(QWidget):
 
     def validate(self):
         if self.model.col_string_filter != "":
-            cols = [
+            cols = {
                 col
                 for col in self.model.axis_columns
                 if col.startswith(self.model.col_string_filter)
-            ]
+            }
             if len(cols) >= 2:
                 self.model.axis_columns = cols
 
