@@ -22,9 +22,6 @@ class HoloVizWidget(QWidget):
         self.layout().addWidget(self.browser)
 
         self._last_indices = []
-        # self.timer = QTimer()
-        # self.timer.timeout.connect(self._update_on_stream_selection)
-        # self.timer.start(300)  # check every 300 ms
 
     def setup_panel(self):
         pn.config.sizing_mode = "stretch_width"
@@ -49,11 +46,15 @@ class HoloVizWidget(QWidget):
         df = self.model.path_csv_mapper[
             list(self.model.path_csv_mapper.keys())[0]
         ]
-        self.embedding_plot = hv.Points(df).opts(responsive=True)
         self.panel.layout = pn.Column(
             self.sample_selector,
-            self.embedding_plot,
+            hv.Points(df).opts(responsive=True),
         )
+        self.embedding_plot = self.panel.layout[1]
 
     def update_sample_plot(self, event):
-        print()
+        if event.type == "changed":
+            df = self.model.path_csv_mapper[event.new]
+            # TODO: check whether instead of creating new plot we can just overwrite the Column data source
+            self.panel.layout[1] = hv.Points(df).opts(responsive=True)
+            self.embedding_plot = self.panel.layout[1]
