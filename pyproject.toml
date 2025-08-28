@@ -27,7 +27,11 @@ requires-python = ">=3.10"
 dependencies = [
     "numpy",
     "magicgui",
+    "napari",
     "qtpy",
+    "pyqt6",
+    "holoviews",
+    "PyQt6-WebEngine",
 ]
 
 [project.optional-dependencies]
@@ -36,8 +40,6 @@ testing = [
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
     "pytest-cov",  # https://pytest-cov.readthedocs.io/en/latest/
     "pytest-qt",  # https://pytest-qt.readthedocs.io/en/latest/
-    "napari",
-    "pyqt6",
 ]
 
 [project.entry-points."napari.manifest"]
