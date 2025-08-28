@@ -49,9 +49,10 @@ class HoloVizWidget(QWidget):
         df = self.model.path_csv_mapper[
             list(self.model.path_csv_mapper.keys())[0]
         ]
-        self.embedding_plot = hv.Points(df)
+        self.embedding_plot = hv.Points(df).opts(responsive=True)
         self.panel.layout = pn.Column(
-            self.sample_selector, self.embedding_plot
+            self.sample_selector,
+            self.embedding_plot,
         )
 
     def update_sample_plot(self, event):
